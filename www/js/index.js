@@ -94,63 +94,6 @@ var db = firebase.database();
     ]);
 
     aplicacion.controller('ntsController',['$scope','Auth','$http',function($scope,Auth,$http){
-        $scope.mostrar = true;
-        $scope.principal_card = true;
-        $scope.no_authorized_card = false;
-        $scope.auth = Auth;
-
-        $scope.auth.$onAuthStateChanged(function(firebaseUser) {
-            $scope.firebaseUser = firebaseUser;
-            console.log("usuario logueado con google");
-            console.log(firebaseUser);
-            $scope.chequear_whitelist(firebaseUser.email,firebaseUser);
-        });
-
-        $scope.chequear_whitelist = function(email,usuario) {
-            var es_vivillo = 0;
-            db.ref('/whitelist').once('value').then(function(snapshot) {
-                var username = snapshot.val();
-                $.each(username, function(index, val) {
-                    if (val == email){
-                        console.log("adentro" + index);
-                        console.log("Exito rotundo. Ya enviamos la habilitacion");
-                        $scope.enviar_notificacion(usuario);
-                        es_vivillo++;
-                    } 
-                });
-                if (es_vivillo == 0) {
-                    console.log("Vivillo");
-                    $scope.no_authorized_card = true;
-                    $scope.principal_card = false;
-                    $scope.$apply();    
-                }               
-            }); 
-        }
-
-        $scope.enviar_notificacion = function(usuario){
-            db.ref('/appusers/'+g_userid+'/deviceid').once('value').then(function(snapshot) {
-                console.log("enviar_notificacion");
-                var deviceid = snapshot.val();
-                $scope.guardar_usuario_registrado(usuario,deviceid);
-                $.post('/ganzua_signup/enviar_notificacion_push', {deviceid: deviceid,uid:usuario.uid}, function(data) {
-                    console.log(data);
-                    window.close();
-                });
-            }); 
-        }
-
-        $scope.guardar_usuario_registrado = function(usuario,deviceid){
-            console.log("guardar usuario usuarios_registrados");
-            if (usuario.photoUrl == null){
-                usuario.photoUrl = "sinfoto";
-            } 
-              db.ref("/users/"+usuario.uid).set({
-                uid: usuario.uid,
-                displayName: usuario.displayName,
-                photoUrl: usuario.photoUrl, 
-                email: usuario.email,
-                deviceid: deviceid,
-              });
-        }           
-    }]);//ganzuaController
+        console.log("en el controllers");        
+    }]);//ntsController
 })();//doc ready
