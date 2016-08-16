@@ -34,7 +34,11 @@ var app = {
         
     },onDeviceReady: function() {
         console.log("deviceready");
-        var pushNotification = window.plugins.pushNotification;
+        angular.element(document).ready(function() {
+            angular.bootstrap(document);
+        });
+        
+        /*var pushNotification = window.plugins.pushNotification;
         pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"391779146922","ecb":"app.onNotificationGCM"});
         },successHandler: function(result) {
             console.log('registration Callback Success! Result = '+result);
@@ -60,7 +64,7 @@ var app = {
                   alert('An unknown GCM event has occurred');
                   break;
             }
-        }
+        }*/
 };//devideready
 
 function insertar_id(url,deviceid){
