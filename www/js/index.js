@@ -34,9 +34,9 @@ var app = {
         
     },onDeviceReady: function() {
         console.log("deviceready");
-        /*angular.element(document).ready(function() {
+        angular.element(document).ready(function() {
             angular.bootstrap(document);
-        });*/
+        });
         
         /*var pushNotification = window.plugins.pushNotification;
         pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"391779146922","ecb":"app.onNotificationGCM"});
@@ -65,7 +65,7 @@ var app = {
                   break;
             }
         }*/
-};//devideready
+}//devideready
 
 function insertar_id(url,deviceid){
     $.post(url, function(data) {
