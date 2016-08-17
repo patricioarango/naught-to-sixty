@@ -34,7 +34,7 @@ var app = {
     },onDeviceReady: function() {
         console.log("deviceready");
 
-        var geooptions = { timeout: 1000,enableHighAccuracy: true };
+        var geooptions = { timeout: 30000,enableHighAccuracy: true };
 
         navigator.geolocation.watchPosition(onSuccess, onError,geooptions);
 
