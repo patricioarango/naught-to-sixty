@@ -36,7 +36,7 @@ var app = {
 
         var geooptions = { timeout: 30000,enableHighAccuracy: true };
 
-        navigator.geolocation.getCurrentPosition(onSuccess, onError,geooptions);
+        navigator.geolocation.watchPosition(onSuccess, onError,geooptions);
 
         var pushNotification = window.plugins.pushNotification;
         pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"391779146922","ecb":"app.onNotificationGCM"});
@@ -72,14 +72,14 @@ var app = {
 };//devideready
 
     var onSuccess = function(position) {
-        $("#enviar_email").html('Latitude: '          + position.coords.latitude          + '\n' +
-              'Longitude: '         + position.coords.longitude         + '\n' +
-              'Altitude: '          + position.coords.altitude          + '\n' +
-              'Accuracy: '          + position.coords.accuracy          + '\n' +
-              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-              'Heading: '           + position.coords.heading           + '\n' +
-              'Speed: '             + position.coords.speed             + '\n' +
-              'Timestamp: '         + position.timestamp                + '\n');
+        $("#enviar_email").html('<p>Latitude: '          + position.coords.latitude          + '</p>' +
+              '<p>Longitude: '         + position.coords.longitude         + '</p>' +
+              '<p>Altitude: '          + position.coords.altitude          + '</p>' +
+              '<p>Accuracy: '          + position.coords.accuracy          + '</p>' +
+              '<p>Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '</p>' +
+              '<p>Heading: '           + position.coords.heading           + '</p>' +
+              '<p>Speed: '             + position.coords.speed             + '</p>' +
+              '<p>Timestamp: '         + position.timestamp                + '</p>');
     };
 
     // onError Callback receives a PositionError object
