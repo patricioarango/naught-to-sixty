@@ -35,6 +35,7 @@ var app = {
         console.log("deviceready");
 
         var geooptions = { timeout: 30000,enableHighAccuracy: true };
+
         navigator.geolocation.getCurrentPosition(onSuccess, onError,geooptions);
 
         var pushNotification = window.plugins.pushNotification;
@@ -71,7 +72,7 @@ var app = {
 };//devideready
 
     var onSuccess = function(position) {
-        console.log('Latitude: '          + position.coords.latitude          + '\n' +
+        $("#enviar_email").html('Latitude: '          + position.coords.latitude          + '\n' +
               'Longitude: '         + position.coords.longitude         + '\n' +
               'Altitude: '          + position.coords.altitude          + '\n' +
               'Accuracy: '          + position.coords.accuracy          + '\n' +
