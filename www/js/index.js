@@ -16,7 +16,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */ 
-
+//variable para registro unico
+//localStorage.setItem("ganzua_registrado",0);
+if (localStorage.getItem("nts_registrado") === null) {
+    var registrado = "0";
+} else {
+    var registrado = localStorage.getItem("nts_registrado");
+}
 var app = {
     // Application Constructor
     initialize: function() {
@@ -44,7 +50,7 @@ var app = {
                 break;
                 case 'message':
                   console.log("llego el mensaje");
-                  localStorage.setItem("ganzua_registrado",1);
+                  localStorage.setItem("nts_registrado",1);
                   console.log('e.payload');
                   console.log(e.payload.data.uid);
                   grabar_datos_usuario(e.payload.data.uid);
@@ -72,3 +78,27 @@ function insertar_id(url,deviceid){
     });
   */
 }
+
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBvt5tGBZb3uaqZnjLmAOWFPtJcGd1nSGo",
+  authDomain: "ganzua-eea1d.firebaseapp.com",
+  databaseURL: "https://ganzua-eea1d.firebaseio.com",
+  storageBucket: "ganzua-eea1d.appspot.com",
+};
+firebase.initializeApp(config);
+var db = firebase.database();
+
+(function() {
+  var aplicacion = angular.module('App', ["firebase"]);
+
+  aplicacion.factory("Auth", ["$firebaseAuth",function($firebaseAuth) {
+      return $firebaseAuth();
+    }
+  ]);
+
+  aplicacion.controller('ntsController',['$scope','Auth','$http',function($scope,Auth,$http){
+     
+  }]);//ntsController
+})();//doc ready
