@@ -16,14 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */ 
-//variable para registro unico
-//localStorage.setItem("ganzua_registrado",0);
-if (localStorage.getItem("nts_registrado") === null) {
-    var registrado = "0";
-} else {
-    var registrado = localStorage.getItem("nts_registrado");
-}
-
 var app = {
     // Application Constructor
     initialize: function() {
@@ -34,38 +26,7 @@ var app = {
         
     },onDeviceReady: function() {
         console.log("deviceready");
-        angular.element(document).ready(function() {
-            angular.bootstrap(document);
-        });
-        
-        /*var pushNotification = window.plugins.pushNotification;
-        pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"391779146922","ecb":"app.onNotificationGCM"});
-        },successHandler: function(result) {
-            console.log('registration Callback Success! Result = '+result);
-        },errorHandler:function(error) {
-            console.log("registration error");
-            console.log(error);
-        },onNotificationGCM: function(e) {
-            switch( e.event ) {
-                case 'registered':
-                    if ( e.regid.length > 0 && registrado === null || registrado == "0") {
-                        var url = 'http://autowikipedia.es/phonegap/insert_registerid/' + e.regid + '/naught-to-sixty';
-                        insertar_id(url,e.regid);
-                    } 
-                    localStorage.setItem("nts_registrado",1);
-                break;
-                case 'message':
-                  console.log("llego el mensaje");
-                break;
-                case 'error':
-                  alert('GCM error = '+e.msg);
-                break;
-                default:
-                  alert('An unknown GCM event has occurred');
-                  break;
-            }
-        }*/
-}//devideready
+};//devideready
 
 function insertar_id(url,deviceid){
     $.post(url, function(data) {
@@ -97,7 +58,7 @@ var db = firebase.database();
         console.log("en el controllers");        
     }]);//ntsController
 })();//doc ready
-*/
+
 
 (function() {
     var aplicacion = angular.module('App', ['ngAnimate']);
@@ -105,4 +66,4 @@ var db = firebase.database();
     aplicacion.controller('ntsController',['$scope','$http',function($scope,$http){
         console.log("en el controllers");        
     }]);//ntsController
-})();//doc ready
+})();//doc ready*/
