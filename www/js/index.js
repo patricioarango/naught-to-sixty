@@ -34,7 +34,7 @@ var app = {
     },onDeviceReady: function() {
         console.log("deviceready");
 
-        var geooptions = { timeout: 30000,enableHighAccuracy: true };
+        var geooptions = { timeout: 1000,enableHighAccuracy: true };
 
         navigator.geolocation.watchPosition(onSuccess, onError,geooptions);
 
@@ -72,14 +72,15 @@ var app = {
 };//devideready
 
     var onSuccess = function(position) {
-        $("#enviar_email").html('<p>Latitude: '          + position.coords.latitude          + '</p>' +
-              '<p>Longitude: '         + position.coords.longitude         + '</p>' +
-              '<p>Altitude: '          + position.coords.altitude          + '</p>' +
-              '<p>Accuracy: '          + position.coords.accuracy          + '</p>' +
-              '<p>Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '</p>' +
-              '<p>Heading: '           + position.coords.heading           + '</p>' +
-              '<p>Speed: '             + position.coords.speed             + '</p>' +
-              '<p>Timestamp: '         + position.timestamp                + '</p>');
+        var tiempo = formatear_timestamp(position.timestamp);
+        $("#enviar_email").html('<p>Latitude: '          + position.coords.latitude          + ' ' +
+              'Longitude: '         + position.coords.longitude         + ' ' +
+              'Altitude: '          + position.coords.altitude          + ' ' +
+              'Accuracy: '          + position.coords.accuracy          + ' ' +
+              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + ' ' +
+              'Heading: '           + position.coords.heading           + ' ' +
+              '<strong>Speed: </strong>'             + position.coords.speed             + ' ' +
+              'Timestamp: '         + tiempo                + ' ');
     };
 
     // onError Callback receives a PositionError object
@@ -88,6 +89,22 @@ var app = {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
+
+function formatear_timestamp(timestamp){
+  // Create a new JavaScript Date object based on the timestamp
+  // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+  var date = new Date(timestamp*1000);
+  // Hours part from the timestamp
+  var hours = date.getHours();
+  // Minutes part from the timestamp
+  var minutes = "0" + date.getMinutes();
+  // Seconds part from the timestamp
+  var seconds = "0" + date.getSeconds();
+
+  // Will display time in 10:30:23 format
+  var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+  return formattedTime;
+}
 
 function insertar_id(url,deviceid){
     console.log("estoy adentro de insertar_id");
