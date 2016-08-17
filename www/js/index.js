@@ -73,6 +73,8 @@ var app = {
 
     var onSuccess = function(position) {
         var tiempo = formatear_timestamp(position.timestamp);
+        var d = new Date(position.timestamp);
+        var n = d.toTimeString();
         $("#enviar_email").html('<p>Latitude: '          + position.coords.latitude          + ' ' +
               'Longitude: '         + position.coords.longitude         + ' ' +
               'Altitude: '          + position.coords.altitude          + ' ' +
@@ -80,7 +82,8 @@ var app = {
               'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + ' ' +
               'Heading: '           + position.coords.heading           + ' ' +
               '<strong>Speed: </strong>'             + position.coords.speed             + ' ' +
-              'Timestamp: '         + tiempo                + ' ');
+              'Timestamp: '         + tiempo                + ' '+
+              'Hora normal: ' + n);
     };
 
     // onError Callback receives a PositionError object
@@ -95,7 +98,7 @@ function formatear_timestamp(timestamp){
   console.log(timestamp);
   // Create a new JavaScript Date object based on the timestamp
   // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-  var date = new Date(timestamp*1000);
+  var date = new Date(timestamp);
   // Hours part from the timestamp
   var hours = date.getHours();
   // Minutes part from the timestamp
