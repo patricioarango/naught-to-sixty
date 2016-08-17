@@ -83,7 +83,7 @@ function insertar_id(url,deviceid){
   */
 }
 
-/*
+/**/
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyBvt5tGBZb3uaqZnjLmAOWFPtJcGd1nSGo",
@@ -103,7 +103,6 @@ var db = firebase.database();
   ]);
 
   aplicacion.controller('ntsController',['$scope','Auth','$http',function($scope,Auth,$http){
-     
+     console.log("adentro");
   }]);//ntsController
 })();//doc ready
-*/
