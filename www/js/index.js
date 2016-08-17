@@ -91,6 +91,8 @@ var app = {
     }
 
 function formatear_timestamp(timestamp){
+  console.log("timestamp");
+  console.log(timestamp);
   // Create a new JavaScript Date object based on the timestamp
   // multiplied by 1000 so that the argument is in milliseconds, not seconds.
   var date = new Date(timestamp*1000);
