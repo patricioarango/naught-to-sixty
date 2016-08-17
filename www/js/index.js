@@ -83,7 +83,7 @@ function insertar_id(url,deviceid){
   */
 }
 
-
+/*
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyBvt5tGBZb3uaqZnjLmAOWFPtJcGd1nSGo",
@@ -106,3 +106,4 @@ var db = firebase.database();
      
   }]);//ntsController
 })();//doc ready
+*/
