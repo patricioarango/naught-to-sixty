@@ -104,5 +104,6 @@ var db = firebase.database();
 
   aplicacion.controller('ntsController',['$scope','Auth','$http',function($scope,Auth,$http){
      console.log("adentro");
+     $scope.ver = true;
   }]);//ntsController
 })();//doc ready
