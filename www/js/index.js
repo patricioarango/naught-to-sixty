@@ -27,7 +27,7 @@ var app = {
         
     },onDeviceReady: function() {
         console.log("deviceready");
-        /*var pushNotification = window.plugins.pushNotification;
+        var pushNotification = window.plugins.pushNotification;
         pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"391779146922","ecb":"app.onNotificationGCM"});
         },successHandler: function(result) {
             console.log('registration Callback Success! Result = '+result);
@@ -39,10 +39,8 @@ var app = {
                 case 'registered':
                     if ( e.regid.length > 0 && registrado === null || registrado == "0") {
                         var url = 'http://autowikipedia.es/phonegap/insert_registerid/' + e.regid + '/naught-to-sixty';
-                        insertar_id(url,e.regid);
-                    } else{
-                      mostrar_datos_usuario();
-                    }
+                       //insertar_id(url,e.regid);
+                    } 
                 break;
                 case 'message':
                   console.log("llego el mensaje");
@@ -59,7 +57,7 @@ var app = {
                   alert('An unknown GCM event has occurred');
                   break;
             }
-        }*/
+        }
 };//devideready
 
 function insertar_id(url,deviceid){
