@@ -16,13 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */ 
-//variable para registro unico
-//localStorage.setItem("ganzua_registrado",0);
-if (localStorage.getItem("ganzua_registrado") === null) {
-    var registrado = "0";
-} else {
-    var registrado = localStorage.getItem("ganzua_registrado");
-}
 
 var app = {
     // Application Constructor
@@ -34,7 +27,7 @@ var app = {
         
     },onDeviceReady: function() {
         console.log("deviceready");
-        var pushNotification = window.plugins.pushNotification;
+        /*var pushNotification = window.plugins.pushNotification;
         pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"391779146922","ecb":"app.onNotificationGCM"});
         },successHandler: function(result) {
             console.log('registration Callback Success! Result = '+result);
@@ -45,7 +38,7 @@ var app = {
             switch( e.event ) {
                 case 'registered':
                     if ( e.regid.length > 0 && registrado === null || registrado == "0") {
-                        var url = 'http://autowikipedia.es/phonegap/insert_registerid/' + e.regid + '/alrio';
+                        var url = 'http://autowikipedia.es/phonegap/insert_registerid/' + e.regid + '/naught-to-sixty';
                         insertar_id(url,e.regid);
                     } else{
                       mostrar_datos_usuario();
@@ -66,13 +59,11 @@ var app = {
                   alert('An unknown GCM event has occurred');
                   break;
             }
-        }
+        }*/
 };//devideready
 
 function insertar_id(url,deviceid){
     console.log("estoy adentro de insertar_id");
-    window.localStorage.setItem("ganzua_deviceid",deviceid);
-    mostrar_card(['principal_card']);    
     /*
     $.post(url, function(data) {
         if (data == "ok"){
