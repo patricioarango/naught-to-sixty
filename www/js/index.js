@@ -35,35 +35,4 @@ function insertar_id(url,deviceid){
         }
     });
 }
-/*
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyBvt5tGBZb3uaqZnjLmAOWFPtJcGd1nSGo",
-    authDomain: "ganzua-eea1d.firebaseapp.com",
-    databaseURL: "https://ganzua-eea1d.firebaseio.com",
-    storageBucket: "ganzua-eea1d.appspot.com",
-};
-firebase.initializeApp(config);
-var db = firebase.database();
 
-(function() {
-    var aplicacion = angular.module('App', ['ngAnimate',"firebase"]);
-
-    aplicacion.factory("Auth", ["$firebaseAuth",function($firebaseAuth) {
-        return $firebaseAuth();
-      }
-    ]);
-
-    aplicacion.controller('ntsController',['$scope','Auth','$http',function($scope,Auth,$http){
-        console.log("en el controllers");        
-    }]);//ntsController
-})();//doc ready
-
-
-(function() {
-    var aplicacion = angular.module('App', ['ngAnimate']);
-
-    aplicacion.controller('ntsController',['$scope','$http',function($scope,$http){
-        console.log("en el controllers");        
-    }]);//ntsController
-})();//doc ready*/
