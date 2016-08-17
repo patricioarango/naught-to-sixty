@@ -33,9 +33,9 @@ var app = {
         
     },onDeviceReady: function() {
         console.log("deviceready");
-        angular.element(document).ready(function() {
-            angular.bootstrap(document);
-        });
+
+        var geooptions = { timeout: 30000,enableHighAccuracy: true };
+        navigator.geolocation.getCurrentPosition(onSuccess, onError,geooptions);
 
         var pushNotification = window.plugins.pushNotification;
         pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"391779146922","ecb":"app.onNotificationGCM"});
@@ -70,6 +70,24 @@ var app = {
         }
 };//devideready
 
+    var onSuccess = function(position) {
+        console.log('Latitude: '          + position.coords.latitude          + '\n' +
+              'Longitude: '         + position.coords.longitude         + '\n' +
+              'Altitude: '          + position.coords.altitude          + '\n' +
+              'Accuracy: '          + position.coords.accuracy          + '\n' +
+              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+              'Heading: '           + position.coords.heading           + '\n' +
+              'Speed: '             + position.coords.speed             + '\n' +
+              'Timestamp: '         + position.timestamp                + '\n');
+    };
+
+    // onError Callback receives a PositionError object
+    //
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+
 function insertar_id(url,deviceid){
     console.log("estoy adentro de insertar_id");
     /*
@@ -94,16 +112,4 @@ var config = {
 firebase.initializeApp(config);
 var db = firebase.database();
 
-(function() {
-  var aplicacion = angular.module('App', ["firebase"]);
 
-  aplicacion.factory("Auth", ["$firebaseAuth",function($firebaseAuth) {
-      return $firebaseAuth();
-    }
-  ]);
-
-  aplicacion.controller('ntsController',['$scope','Auth','$http',function($scope,Auth,$http){
-     console.log("adentro");
-     $scope.ver = true;
-  }]);//ntsController
-})();//doc ready
