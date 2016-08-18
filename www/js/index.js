@@ -81,7 +81,7 @@ var app = {
               'Accuracy: '          + position.coords.accuracy          + ' ' +
               'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + ' ' +
               'Heading: '           + position.coords.heading           + ' ' +
-              '<strong>Speed: </strong>'             + position.coords.speed             + ' ' +
+              '<strong>Speed: </strong>'             + (position.coords.speed * 3.6)             + ' ' +
               'Timestamp: '         + tiempo                + ' '+
               'Hora normal: ' + n);
     };
