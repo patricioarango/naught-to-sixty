@@ -27,7 +27,8 @@
     <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
     <link rel="stylesheet" href="css/material_icons.css" />
-      <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 
     <link rel="stylesheet" href="css/index.css" />
     <title>Naught-to-sixty</title>
@@ -50,12 +51,22 @@
                     </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col s12 flow-text center-align" id="enviar_email">
-
-                </div>
             </div>      
             </div> <!-- login card-->  
+            <div class="row" id="geo_values"></div>
+            <div class="row center-align">
+              <span class="fa-stack fa-lg fa-5x" id="start_engine">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-flag-checkered fa-stack-1x fa-inverse"></i>
+                </span>
+                <div id="content" style="font-weight:700;font-size:8em"></div>
+                
+
+<form name="timeform">
+Time: <input type=text name="timetextarea" value="00:00" size="10" style = "font-size:20px"> Lap: <input type=text name="laptime" size="10" style = "font-size:20px"><br>
+<br>
+<input type=button name="start" value="Start/Lap" onclick="sw_start()"> <input type=button name="stop" value="Stop" onclick="Stop()"> <input type=button name="reset" value="Reset" onclick="Reset()">
+</form>
     </div><!-- container-->
          <footer class="page-footer cyan lighten-1">
           <div class="container">
@@ -81,7 +92,129 @@
   
   
   <script type="text/javascript" src="js/index.js"></script>
+<script>
+          var count = 3;
 
+function updateTimer(){
+    if(count > 0){
+        $("#content").fadeOut('slow', function(){
+        	$("#content").text(count);
+            $("#content").fadeIn();
+            count--;
+        });
+        
+    }
+    else if(count == 0){
+        $("#content").fadeOut('slow', function(){
+        	$("#content").text("Go!!");
+            $("#content").fadeIn();
+            count--;
+            sw_start();
+        });
+        
+    }
+    else {
+    	$("#content").fadeOut();
+        clearInterval(interval);
+    }
+    
+}
+
+$("#start_engine").click(function(){
+    $("#start_engine").hide();
+    setInterval(function(){updateTimer()},2000);
+});
+
+    var timercount = 0;
+var timestart  = null;
+ 
+function showtimer() {
+	if(timercount) {
+		clearTimeout(timercount);
+		clockID = 0;
+	}
+	if(!timestart){
+		timestart = new Date();
+	}
+	var timeend = new Date();
+	var timedifference = timeend.getTime() - timestart.getTime();
+	timeend.setTime(timedifference);
+	var minutes_passed = timeend.getMinutes();
+	if(minutes_passed < 10){
+		minutes_passed = "0" + minutes_passed;
+	}
+	var seconds_passed = timeend.getSeconds();
+	if(seconds_passed < 10){
+		seconds_passed = "0" + seconds_passed;
+	}
+	document.timeform.timetextarea.value = minutes_passed + ":" + seconds_passed;
+	timercount = setTimeout("showtimer()", 1000);
+}
+ 
+function sw_start(){
+	if(!timercount){
+	timestart   = new Date();
+	document.timeform.timetextarea.value = "00:00";
+	document.timeform.laptime.value = "";
+	timercount  = setTimeout("showtimer()", 1000);
+	}
+	else{
+	var timeend = new Date();
+		var timedifference = timeend.getTime() - timestart.getTime();
+		timeend.setTime(timedifference);
+		var minutes_passed = timeend.getMinutes();
+		if(minutes_passed < 10){
+			minutes_passed = "0" + minutes_passed;
+		}
+		var seconds_passed = timeend.getSeconds();
+		if(seconds_passed < 10){
+			seconds_passed = "0" + seconds_passed;
+		}
+		var milliseconds_passed = timeend.getMilliseconds();
+		if(milliseconds_passed < 10){
+			milliseconds_passed = "00" + milliseconds_passed;
+		}
+		else if(milliseconds_passed < 100){
+			milliseconds_passed = "0" + milliseconds_passed;
+		}
+		document.timeform.laptime.value = minutes_passed + ":" + seconds_passed + "." + milliseconds_passed;
+	}
+}
+ 
+function Stop() {
+	if(timercount) {
+		clearTimeout(timercount);
+		timercount  = 0;
+		var timeend = new Date();
+		var timedifference = timeend.getTime() - timestart.getTime();
+		timeend.setTime(timedifference);
+		var minutes_passed = timeend.getMinutes();
+		if(minutes_passed < 10){
+			minutes_passed = "0" + minutes_passed;
+		}
+		var seconds_passed = timeend.getSeconds();
+		if(seconds_passed < 10){
+			seconds_passed = "0" + seconds_passed;
+		}
+		var milliseconds_passed = timeend.getMilliseconds();
+		if(milliseconds_passed < 10){
+			milliseconds_passed = "00" + milliseconds_passed;
+		}
+		else if(milliseconds_passed < 100){
+			milliseconds_passed = "0" + milliseconds_passed;
+		}
+		document.timeform.timetextarea.value = minutes_passed + ":" + seconds_passed + "." + milliseconds_passed;
+	}
+	timestart = null;
+}
+ 
+function Reset() {
+	timestart = null;
+	document.timeform.timetextarea.value = "00:00";
+	document.timeform.laptime.value = "";
+}
+    
+</script>          
   <script type="text/javascript">
      app.initialize();
  </script>

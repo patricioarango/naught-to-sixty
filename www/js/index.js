@@ -75,7 +75,7 @@ var app = {
         var tiempo = formatear_timestamp(position.timestamp);
         var d = new Date(position.timestamp);
         var n = d.toTimeString();
-        $("#enviar_email").html('<p>Latitude: '          + position.coords.latitude          + ' ' +
+        $("#geo_values").html('<p>Latitude: '          + position.coords.latitude          + ' ' +
               'Longitude: '         + position.coords.longitude         + ' ' +
               'Altitude: '          + position.coords.altitude          + ' ' +
               'Accuracy: '          + position.coords.accuracy          + ' ' +
