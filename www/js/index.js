@@ -239,9 +239,9 @@ var stop_speed = 100000;
 function control_velocidad(velocidad){
   if (velocidad >= stop_speed){
     //detenemos el watch del geolocalizador
-    //navigator.geolocation.clearWatch(watchID);
+    navigator.geolocation.clearWatch(watchID);
     //detenemos el simulador
-    clearInterval(simulador_velocidad);
+    //clearInterval(simulador_velocidad);
     //detenemos el cronometro
     clearTimeout(timercount);
     console.log("tu tiempo fue de: " + tiempo);
