@@ -23,6 +23,7 @@ if (localStorage.getItem("nts_registrado") === null) {
 } else {
     var registrado = localStorage.getItem("nts_registrado");
 }
+var watchID;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -36,7 +37,7 @@ var app = {
 
         var geooptions = { timeout: 30000,enableHighAccuracy: true };
 
-        navigator.geolocation.watchPosition(onSuccess, onError,geooptions);
+        watchID = navigator.geolocation.watchPosition(onSuccess, onError,geooptions);
 
         var pushNotification = window.plugins.pushNotification;
         pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"391779146922","ecb":"app.onNotificationGCM"});
@@ -75,7 +76,7 @@ var app = {
         var tiempo = formatear_timestamp(position.timestamp);
         var d = new Date(position.timestamp);
         var n = d.toTimeString();
-        $("#geo_values").html('<p>Latitude: '          + position.coords.latitude          + ' ' +
+        /*$("#geo_values").html('<p>Latitude: '          + position.coords.latitude          + ' ' +
               'Longitude: '         + position.coords.longitude         + ' ' +
               'Altitude: '          + position.coords.altitude          + ' ' +
               'Accuracy: '          + position.coords.accuracy          + ' ' +
@@ -83,7 +84,11 @@ var app = {
               'Heading: '           + position.coords.heading           + ' ' +
               '<strong>Speed: </strong>'             + (position.coords.speed * 3.6)             + ' ' +
               'Timestamp: '         + tiempo                + ' '+
-              'Hora normal: ' + n);
+              'Hora normal: ' + n);*/
+        var current_speed = (position.coords.speed * 3.6).toFixed(2); 
+        $("#speed_contenedor").text(current_speed + " km/h");
+        $(".determinate").css("width", current_speed);
+        control_velocidad(current_speed);
     };
 
     // onError Callback receives a PositionError object
@@ -135,4 +140,166 @@ var config = {
 firebase.initializeApp(config);
 var db = firebase.database();
 
+var speed = 1;
+function simulador(){
+    $(".determinate").css("width", speed);
+    $("#speed_contenedor").text(speed + " km/h");
+    control_velocidad(speed);
+    speed++;
+}
 
+//countdown
+var count = 3;
+var interval = 2000;
+function updateTimer(){
+    if(count > 0){
+        $("#content").fadeOut('slow', function(){
+            $("#content").text(count);
+            $("#content").fadeIn();
+            count--;
+        });
+
+    }
+    else if(count == 0){
+        $("#content").fadeOut('slow', function(){
+            $("#content").text("Go!!");
+              sw_start();
+            /*$("#content").fadeIn(function(){
+            });*/
+            count--;
+        });
+
+    } 
+    else {
+        $("#content").fadeOut();
+        clearInterval(interval);
+    }
+
+}
+
+$("#start_engine").click(function(){
+    $("#start_engine").hide("fast", function(){
+      setInterval(function(){updateTimer()},interval);
+    });
+});
+
+//chronometer
+var timercount = 0;
+var timestart  = null;
+var tiempo;
+function showtimer() {
+    /*if(timercount) {
+        clearTimeout(timercount);
+        clockID = 0;
+    }*/
+    if(!timestart){
+        timestart = new Date();
+    }
+    var timeend = new Date();
+    var timedifference = timeend.getTime() - timestart.getTime();
+    timeend.setTime(timedifference);
+    var minutes_passed = timeend.getMinutes();
+    if(minutes_passed < 10){
+        minutes_passed = "0" + minutes_passed;
+    }
+    var seconds_passed = timeend.getSeconds();
+
+    var miliseconds_passed = timeend.getMilliseconds();
+    if(miliseconds_passed < 10){
+        miliseconds_passed = "00" + miliseconds_passed;
+    } else if (miliseconds_passed < 100){
+        miliseconds_passed = "0" + miliseconds_passed;
+    }
+    tiempo = seconds_passed + "." + miliseconds_passed;
+    control_tiempo(seconds_passed);
+    $("#time_contenedor").html(seconds_passed + "." + miliseconds_passed).fadeIn("slow");
+    //timercount = setTimeout("showtimer()", 10);
+}
+
+function sw_start(){
+  $("#speed_contenedor").show();
+  $("#progress_bar").show();
+  //simulador_velocidad = setInterval(function(){simulador()},50);
+
+  timestart   = new Date();
+  $("#time_contenedor").html("00:00");
+  //showtimer();
+  timercount  = setInterval(function(){showtimer()}, 10);
+}
+
+function show_extra_time(){
+  $("#time_contenedor_mensaje").show();
+  $("#time_contenedor_mensaje").html("<p >tu auto es una tortuga, ¿qué querés testear?</p>");
+  $("#speed_contenedor").css("font-size","2em");
+  $("#time_contenedor").css("font-size","4em");
+  $("#restart_engine").show();
+}
+
+var stop_speed = 100000;
+function control_velocidad(velocidad){
+  if (velocidad >= stop_speed){
+    //detenemos el watch del geolocalizador
+    //navigator.geolocation.clearWatch(watchID);
+    //detenemos el simulador
+    clearInterval(simulador_velocidad);
+    //detenemos el cronometro
+    clearTimeout(timercount);
+    console.log("tu tiempo fue de: " + tiempo);
+  }
+}
+
+var stop_one = 2;
+var stop_two = 4;
+function control_tiempo(segundos){
+  console.log(timercount);
+  if (segundos > stop_one && segundos < stop_two){
+    $("#time_contenedor").fadeOut();
+  } 
+  if (segundos >= stop_two){
+    show_extra_time();
+    //detenemos el simulador
+    //clearInterval(simulador_velocidad);
+    //detenemos el cronometro
+    //clearInterval(timercount);
+  }
+
+}
+/*
+function Stop() {
+    if(timercount) {
+        clearTimeout(timercount);
+        timercount  = 0;
+        var timeend = new Date();
+        var timedifference = timeend.getTime() - timestart.getTime();
+        timeend.setTime(timedifference);
+        var minutes_passed = timeend.getMinutes();
+        if(minutes_passed < 10){
+            minutes_passed = "0" + minutes_passed;
+        }
+        var seconds_passed = timeend.getSeconds();
+        if(seconds_passed < 10){
+            seconds_passed = "0" + seconds_passed;
+        }
+        var milliseconds_passed = timeend.getMilliseconds();
+        if(milliseconds_passed < 10){
+            milliseconds_passed = "00" + milliseconds_passed;
+        }
+        else if(milliseconds_passed < 100){
+            milliseconds_passed = "0" + milliseconds_passed;
+        }
+        $("#tiempo_final").html(minutes_passed + ":" + seconds_passed + "." + milliseconds_passed);
+        console.log("tiempo final");
+        console.log(minutes_passed + ":" + seconds_passed + "." + milliseconds_passed);
+    }
+    timestart = null;
+}
+*/
+/*function Reset() {
+    timestart = null;
+    document.timeform.timetextarea.value = "00:00";
+    document.timeform.laptime.value = "";
+}*/
+
+$(document).on("click","#restart_engine",function(){
+  window.location.reload();
+});
