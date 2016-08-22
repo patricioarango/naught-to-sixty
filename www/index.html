@@ -54,9 +54,20 @@
                 </div>
                 </div> <!-- nav-->  
                 <div class="row" id="geo_values"></div>
-
+                
+                <div class="row">
+                <div  class="center-align">
+                  <span id="speed_contenedor" style="font-weight:700;font-size:4em" style="display:none;"></span>
+                </div>
+                <div class="center-align">
+                    <span id="speed_not_zero" class="flow-text" style="display:none;"><i class="material-icons red-text accent-4" style="font-size:1.8em;">network_check</i>your speed is not zero, we can't start!</span>
+                </div>    
+                  <div class="progress cyan lighten-3" id="progress_bar" style="display:none;">
+                    <div class="determinate cyan accent-4"></div>
+                  </div>
+                </div>
                 <div class="row center-align">
-                    <i id="start_engine" class="material-icons cyan-text accent-4" style="font-size:16em">network_check</i>
+                    <i id="start_engine" class="material-icons cyan-text accent-4" style="font-size:16em;">network_check</i>
 
                   <span class="fa-stack fa-lg fa-5x" id="finish_flag" style="display:none;">
                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -65,10 +76,7 @@
 
                     <div id="content" style="font-weight:700;font-size:8em"></div>
                     
-                    <div id="speed_contenedor" style="font-weight:700;font-size:4em" style="display:none;"></div>
-                    <div class="progress cyan lighten-3" id="progress_bar" style="display:none;">
-                      <div class="determinate cyan accent-4"></div>
-                    </div>
+
         
                     <div id="time_contenedor" style="font-weight:700;font-size:8em"></div>
                     <div id="tiempo_final" style="font-weight:700;font-size:8em;"></div>

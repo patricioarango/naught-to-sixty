@@ -86,8 +86,8 @@ var app = {
               'Timestamp: '         + tiempo                + ' '+
               'Hora normal: ' + n);*/
         var current_speed = (position.coords.speed * 3.6).toFixed(2); 
-        $("#speed_contenedor").text(current_speed + " km/h");
-        $(".determinate").css("width", current_speed);
+          $("#speed_contenedor").text(current_speed + " km/h");
+          $(".determinate").css("width", current_speed);
         control_velocidad(current_speed);
     };
 
@@ -116,6 +116,7 @@ function formatear_timestamp(timestamp){
   return formattedTime;
 }
 
+var has_started = false;
 function insertar_id(url,deviceid){
     console.log("estoy adentro de insertar_id");
     /*
@@ -219,6 +220,7 @@ function showtimer() {
 function sw_start(){
   $("#speed_contenedor").show();
   $("#progress_bar").show();
+  has_started = true;
   //simulador_velocidad = setInterval(function(){simulador()},50);
 
   timestart   = new Date();
@@ -235,7 +237,7 @@ function show_extra_time(){
   $("#restart_engine").show();
 }
 
-var stop_speed = 100000;
+var stop_speed = 100;
 function control_velocidad(velocidad){
   if (velocidad >= stop_speed){
     //detenemos el watch del geolocalizador
@@ -244,12 +246,20 @@ function control_velocidad(velocidad){
     //clearInterval(simulador_velocidad);
     //detenemos el cronometro
     clearTimeout(timercount);
-    console.log("tu tiempo fue de: " + tiempo);
+    alert("tu tiempo fue de: " + tiempo);
+    localStorage.setItem("nts_tiempo",tiempo);
+  }
+  if (has_started === false && velocidad <> 0){
+    $("#speed_not_zero").show();
+    $("#start_engine").hide();
+  } else {
+    $("#speed_not_zero").hide();
+    $("#start_engine").show();
   }
 }
 
-var stop_one = 2;
-var stop_two = 4;
+var stop_one = 25;
+var stop_two = 30;
 function control_tiempo(segundos){
   console.log(timercount);
   if (segundos > stop_one && segundos < stop_two){
