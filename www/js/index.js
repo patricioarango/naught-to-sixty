@@ -249,7 +249,7 @@ function control_velocidad(velocidad){
     alert("tu tiempo fue de: " + tiempo);
     localStorage.setItem("nts_tiempo",tiempo);
   }
-  if (has_started === false && velocidad <> 0){
+  if (has_started == false && velocidad > 0){
     $("#speed_not_zero").show();
     $("#start_engine").hide();
   } else {
