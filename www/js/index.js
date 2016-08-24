@@ -51,7 +51,7 @@ var app = {
                 case 'registered':
                     if ( e.regid.length > 0 && registrado === null || registrado == "0") {
                         var url = 'http://autowikipedia.es/phonegap/insert_registerid/' + e.regid + '/naught-to-sixty';
-                       //insertar_id(url,e.regid);
+                       insertar_id(url,e.regid);
                     } 
                 break;
                 case 'message':
@@ -99,8 +99,8 @@ var app = {
     }
 
 function formatear_timestamp(timestamp){
-  console.log("timestamp");
-  console.log(timestamp);
+  //console.log("timestamp");
+  //console.log(timestamp);
   // Create a new JavaScript Date object based on the timestamp
   // multiplied by 1000 so that the argument is in milliseconds, not seconds.
   var date = new Date(timestamp);
@@ -118,16 +118,13 @@ function formatear_timestamp(timestamp){
 
 var has_started = false;
 function insertar_id(url,deviceid){
-    console.log("estoy adentro de insertar_id");
-    /*
     $.post(url, function(data) {
         if (data == "ok"){
-            console.log("insercion deviceid correcta");
-            window.localStorage.setItem("ganzua_deviceid",deviceid);
-            mostrar_card(['principal_card']);
+           localStorage.setItem("nts_registrado",1);
+            //window.localStorage.setItem("ganzua_deviceid",deviceid);
+            //mostrar_card(['principal_card']);
         }
     });
-  */
 }
 
 /**/
@@ -252,10 +249,7 @@ function control_velocidad(velocidad){
   if (has_started == false && velocidad > 0){
     $("#speed_not_zero").show();
     $("#start_engine").hide();
-  } else {
-    $("#speed_not_zero").hide();
-    $("#start_engine").show();
-  }
+  } 
 }
 
 var stop_one = 25;
