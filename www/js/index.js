@@ -177,6 +177,7 @@ function updateTimer(){
 
 $("#start_engine").click(function(){
   has_started = true;
+  $("#start_engine").hide();
     $("#start_engine").hide("fast", function(){
       setInterval(function(){updateTimer()},interval);
     });
@@ -247,13 +248,15 @@ function control_velocidad(velocidad){
     alert("tu tiempo fue de: " + tiempo);
     localStorage.setItem("nts_tiempo",tiempo);
   }
-  if (has_started == false && velocidad > 0){
-    $("#speed_not_zero").show();
-    $("#start_engine").hide();
-  } else {
-    $("#speed_not_zero").hide();
-    $("#start_engine").show();    
-  }
+  if (has_started == false){
+    if (velocidad > 0){
+      $("#speed_not_zero").show();
+      $("#start_engine").hide();
+    } else {
+      $("#speed_not_zero").hide();
+      $("#start_engine").show();    
+    }
+  } 
 }
 
 var stop_one = 25;
