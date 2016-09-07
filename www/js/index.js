@@ -236,9 +236,9 @@ function show_extra_time(){
   $("#restart_engine").show();
 }
 
-var stop_speed = 15;
+var stop_speed = 30;
 function control_velocidad(velocidad){
-  if (velocidad >= stop_speed){
+  if (parseInt(velocidad) >= parseInt(stop_speed)){ 
     //detenemos el watch del geolocalizador
     navigator.geolocation.clearWatch(watchID);
     //detenemos el simulador
