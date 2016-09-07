@@ -236,7 +236,7 @@ function show_extra_time(){
   $("#restart_engine").show();
 }
 
-var stop_speed = 100;
+var stop_speed = 15;
 function control_velocidad(velocidad){
   if (velocidad >= stop_speed){
     //detenemos el watch del geolocalizador
