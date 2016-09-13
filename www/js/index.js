@@ -34,10 +34,11 @@ var app = {
         
     },onDeviceReady: function() {
         console.log("deviceready");
-        
+
         var geooptions = { timeout: 30000,enableHighAccuracy: true };
+
         watchID = navigator.geolocation.watchPosition(onSuccess, onError,geooptions);
-        
+
         var pushNotification = window.plugins.pushNotification;
         pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"391779146922","ecb":"app.onNotificationGCM"});
         },successHandler: function(result) {
@@ -69,25 +70,27 @@ var app = {
                   break;
             }
         }
-      var onSuccess = function(position) {
-          /*var tiempo = formatear_timestamp(position.timestamp);
-          var d = new Date(position.timestamp);
-          var n = d.toTimeString();
-          var current_speed = (position.coords.speed * 3.6).toFixed(2); 
-          $("#speed_contenedor").text(current_speed + " km/h");
-          $(".determinate").css("width", current_speed);
-          control_velocidad(current_speed);*/
-          aplicacion.velocidad = position.coords.speed;
-      }
-      var onError = function(error) {
-          console.log('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-      }         
 };//devideready
 
+    var onSuccess = function(position) {
+        var current_speed = (position.coords.speed * 3.6).toFixed(2); 
+        aplicacion.velocidad = current_speed;
+        /*var tiempo = formatear_timestamp(position.timestamp);
+        var d = new Date(position.timestamp);
+        var n = d.toTimeString();
+        
+          $("#speed_contenedor").text(current_speed + " km/h");
+          $(".determinate").css("width", current_speed);
+        control_velocidad(current_speed);*/
 
+    };
 
-
+    // onError Callback receives a PositionError object
+    //
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
 
 function formatear_timestamp(timestamp){
   //console.log("timestamp");
