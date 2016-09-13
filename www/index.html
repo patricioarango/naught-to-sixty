@@ -19,7 +19,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html>
+<html ng-app="App">
 <head>
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
@@ -35,65 +35,8 @@
 
 </head>
 <body>
-    <!--<nav class="cyan">
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Naught-to-60</a>
-          <ul id="nav-mobile" class="right">
-          </ul>
-        </div>
-    </nav>-->
-          <div id="container">
-              <div class="cyan" id="principal_card">
-                    <div class="row" style="padding:15px 0px;">
-                        <div class="col s12">
-                            <div class="card-content">
-                                <h1 class="center-align" style="font-weight:700;font-size:5em">Naught-to-sixty</h1>
-                            </div>
-                        </div>
-                      </div>
-                    <div class="row white-text flow-text center-align cyan z-depth-1">
-                        <div class="col s4 navegador_seleccionado" style="padding: 10px 0px"><strong>0-100 KM/H</strong></div>
-                        <div class="col s4" style="padding: 10px 0px"><strong>402 MTS</strong></div>
-                        <div class="col s4" style="padding: 10px 0px"><strong>RANKING</strong></div>
-                    </div>
-                </div>
-            </div> <!-- nav-->  
-
-                <div class="row" id="geo_values"></div>
-                
-                <div class="row">
-                <div  class="center-align">
-                  <span id="speed_contenedor" style="font-weight:700;font-size:4em" style="display:none;"></span>
-                </div>
-                <div class="center-align">
-                    <span id="speed_not_zero" class="flow-text" style="display:none;"><i class="material-icons red-text accent-4" style="font-size:1.8em;">network_check</i>your speed is not zero, we can't start!</span>
-                </div>    
-                  <div class="progress cyan lighten-3" id="progress_bar" style="display:none;">
-                    <div class="determinate cyan accent-4"></div>
-                  </div>
-                </div>
-                <div class="row center-align">
-                    <i id="start_engine" class="material-icons cyan-text accent-4" style="font-size:16em;">network_check</i>
-
-                  <span class="fa-stack fa-lg fa-5x" id="finish_flag" style="display:none;">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-flag-checkered fa-stack-1x fa-inverse"></i>
-                  </span>
-
-                    <div id="content" style="font-weight:700;font-size:8em"></div>
-                    
-
-        
-                    <div id="time_contenedor" style="font-weight:700;font-size:8em"></div>
-                    <div id="tiempo_final" style="font-weight:700;font-size:8em;"></div>
-                    <div class="row">
-                      <div id="time_contenedor_mensaje" class="col s12 flow-text" style="display:none;">
-                      </div>
-                        <i id="restart_engine" class="material-icons cyan-text accent-4" style="font-size:8em;display:none;">autorenew</i>
-                    </div>
-                    
-
-        </div><!-- container-->
+            <div class="ng-view" autoscroll="true"></div>
+            
          <footer class="page-footer cyan lighten-1">
           <div class="container">
             <div class="row">
@@ -113,6 +56,15 @@
 
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/angular/angular.min.js"></script>
+  <script type="text/javascript" src="js/angular/angular-mocks.js"></script>
+  <script type="text/javascript" src="js/angular/angular-route.min.js"></script>
+  <script type="text/javascript" src="js/angular/angular-animate.min.js"></script>
+  <script type="text/javascript" src="js/routers.js"></script>
+  <script type="text/javascript" src="js/maincontroller.js"></script>
+  <script type="text/javascript" src="js/bytimecontroller.js"></script>
+  <script type="text/javascript" src="js/bydistancecontroller.js"></script>
+  <script type="text/javascript" src="js/rankingcontroller.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
 <script src="js/materialize.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/index.js"></script>
