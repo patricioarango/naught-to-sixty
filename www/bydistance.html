@@ -16,20 +16,20 @@
             </div> <!-- nav-->  
             <div class="row flow-text center-align">
                 <div class="col s4">
-                    <input class="with-gap" name="group" type="radio" id="402m" />
+                    <input class="with-gap" name="group" type="radio" ng-model="cantidad_metros" value="402" id="402m" />
                     <label for="402m">402m</label>
                 </div>
                 <div class="col s4">
-                    <input class="with-gap" name="group" type="radio" id="250m" />
+                    <input class="with-gap" name="group" type="radio" ng-model="cantidad_metros" value="250" id="250m" />
                     <label for="250m">250m</label>
                 </div>
                 <div class="col s4">
-                    <input class="with-gap" name="group" type="checkbox" id="freem" />
+                    <input class="with-gap" name="group" type="checkbox" id="freem" ng-click="quiere_otro()" />
                     <label for="freem">Otro</label>
                 </div>    
             </div>    
-            <div class="input-field col s12">
-              <input id="last_name" type="text" class="validate">
+            <div class="input-field col s12" ng-show="mostrar_mostrar_otro">
+              <input id="last_name" type="text" ng-model="cantidad_metros" class="validate">
               <label for="last_name">¿Cuántos metros querés probar?</label>
             </div>            
 
