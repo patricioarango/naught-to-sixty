@@ -76,6 +76,7 @@ var app = {
 };//devideready
 
     var onSuccess = function(position) {
+      console.log(position);
         current_speed = (position.coords.speed * 3.6).toFixed(2); 
         //aplicacion.velocidad = current_speed;
         /*var tiempo = formatear_timestamp(position.timestamp);
