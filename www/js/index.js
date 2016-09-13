@@ -36,7 +36,7 @@ var app = {
         console.log("deviceready");
         
         var geooptions = { timeout: 30000,enableHighAccuracy: true };
-        watchID = navigator.geolocation.watchPosition(app.onSuccess, app.onError,geooptions);
+        watchID = navigator.geolocation.watchPosition(onSuccess, onError,geooptions);
         
         var pushNotification = window.plugins.pushNotification;
         pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"391779146922","ecb":"app.onNotificationGCM"});
@@ -68,7 +68,8 @@ var app = {
                   alert('An unknown GCM event has occurred');
                   break;
             }
-        },onSuccess = function(position) {
+        }
+      var onSuccess = function(position) {
           /*var tiempo = formatear_timestamp(position.timestamp);
           var d = new Date(position.timestamp);
           var n = d.toTimeString();
@@ -77,10 +78,11 @@ var app = {
           $(".determinate").css("width", current_speed);
           control_velocidad(current_speed);*/
           aplicacion.velocidad = position.coords.speed;
-      },onError = function(error) {
+      }
+      var onError = function(error) {
           console.log('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
-      } 
+      }         
 };//devideready
 
 

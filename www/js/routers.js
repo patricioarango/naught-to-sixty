@@ -1,4 +1,4 @@
- var aplicacion = angular.module('App', ['ngRoute','ngAnimate']);
+ var aplicacion = angular.module('aplicacion', ['ngRoute','ngAnimate']);
  aplicacion.config(function ($compileProvider){
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
     }).config(function ($routeProvider) {
