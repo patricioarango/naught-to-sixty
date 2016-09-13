@@ -24,6 +24,7 @@ if (localStorage.getItem("nts_registrado") === null) {
     var registrado = localStorage.getItem("nts_registrado");
 }
 var watchID;
+var current_speed;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -75,8 +76,8 @@ var app = {
 };//devideready
 
     var onSuccess = function(position) {
-        var current_speed = (position.coords.speed * 3.6).toFixed(2); 
-        aplicacion.velocidad = current_speed;
+        current_speed = (position.coords.speed * 3.6).toFixed(2); 
+        //aplicacion.velocidad = current_speed;
         /*var tiempo = formatear_timestamp(position.timestamp);
         var d = new Date(position.timestamp);
         var n = d.toTimeString();
