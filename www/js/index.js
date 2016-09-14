@@ -24,7 +24,6 @@ if (localStorage.getItem("nts_registrado") === null) {
     var registrado = localStorage.getItem("nts_registrado");
 }
 var watchID;
-var current_speed;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -35,9 +34,7 @@ var app = {
         
     },onDeviceReady: function() {
         console.log("deviceready");
-        //var domElement = document.querySelector('body');
-        //angular.bootstrap(domElement, ['aplicacion']);
- 
+
         var geooptions = { timeout: 30000,enableHighAccuracy: true };
 
         watchID = navigator.geolocation.watchPosition(onSuccess, onError,geooptions);
@@ -76,18 +73,22 @@ var app = {
 };//devideready
 
     var onSuccess = function(position) {
-      console.log(position);
-        current_speed = (position.coords.speed * 3.6).toFixed(2); 
-        localStorage.setItem("velocidad",current_speed);
-        //aplicacion.velocidad = current_speed;
-        /*var tiempo = formatear_timestamp(position.timestamp);
+        var tiempo = formatear_timestamp(position.timestamp);
         var d = new Date(position.timestamp);
         var n = d.toTimeString();
-        
+        /*$("#geo_values").html('<p>Latitude: '          + position.coords.latitude          + ' ' +
+              'Longitude: '         + position.coords.longitude         + ' ' +
+              'Altitude: '          + position.coords.altitude          + ' ' +
+              'Accuracy: '          + position.coords.accuracy          + ' ' +
+              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + ' ' +
+              'Heading: '           + position.coords.heading           + ' ' +
+              '<strong>Speed: </strong>'             + (position.coords.speed * 3.6)             + ' ' +
+              'Timestamp: '         + tiempo                + ' '+
+              'Hora normal: ' + n);*/
+        var current_speed = (position.coords.speed * 3.6).toFixed(2); 
           $("#speed_contenedor").text(current_speed + " km/h");
           $(".determinate").css("width", current_speed);
-        control_velocidad(current_speed);*/
-
+        control_velocidad(current_speed);
     };
 
     // onError Callback receives a PositionError object
