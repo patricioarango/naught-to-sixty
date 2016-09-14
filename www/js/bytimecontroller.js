@@ -7,6 +7,7 @@ aplicacion.controller('ByTimeController',['$scope','$location','$http','$window'
         	$scope.velocidad = position.coords.speed;
         }, function(error){
         	console.log(error);
+        	$scope.velocidad = "error";
         },geooptions);
 	/*console.log("en controller");
 	console.log(current_speed);
