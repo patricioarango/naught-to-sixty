@@ -74,3 +74,6 @@
 #principal_card{
 	    margin: 0rem 0 1rem 0;
 }
+.navegador_seleccionado{
+	border-bottom:3px solid #01579b;
+}
