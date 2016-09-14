@@ -14,25 +14,32 @@
                     </div>
                 </div>
             </div> <!-- nav-->  
+        <div ng-controller="ByDistanceController">
             <div class="row flow-text center-align">
                 <div class="col s4">
-                    <input class="with-gap" name="group" type="radio" ng-model="cantidad_metros" value="402" id="402m" />
+                    <input class="with-gap" name="group" type="radio" ng-model="value" value="402" id="402m" ng-change="metros(value)" />
                     <label for="402m">402m</label>
                 </div>
                 <div class="col s4">
-                    <input class="with-gap" name="group" type="radio" ng-model="cantidad_metros" value="250" id="250m" />
+                    <input class="with-gap" name="group" type="radio" ng-model="value" value="250" id="250m" ng-change="metros(value)" />
                     <label for="250m">250m</label>
                 </div>
                 <div class="col s4">
-                    <input type="checkbox" id="freem" ng-change="quiere_otro(quiere_otro)" ng-model="quiere_otro" />
+                    <input type="checkbox" id="freem" ng-true-value="'A'" ng-false-value="'B'" ng-model="check"/>
                     <label for="freem">Otro</label>
                 </div>    
             </div>    
-            <div class="input-field col s12" ng-show="mostrar_mostrar_otro">
-              <input id="last_name" type="text" ng-model="cantidad_metros" class="validate">
-              <label for="last_name">¿Cuántos metros querés probar?</label>
-            </div>            
-
-            <div class="center-align">
-                <a class="waves-effect waves-light btn cyan accent-4"><i class="material-icons right">check</i>hecho</a>
+            
+            <div class="row" ng-show="check == 'A'"><br><br>
+            	<div class="input-field col s6">
+            		<input class="validate" id="last_name" type="number" ng-model="cantidad_metros" >
+            		<label class="active" for="last_name">¿Cuántos metros querés probar?</label>
+            	</div>
+            	<div class="col s6"><br>
+            		
+            			<a class="waves-effect waves-light btn cyan accent-4"><i class="material-icons right">check</i>hecho</a>
+            		
+            	</div>
             </div>
+
+        </div>
