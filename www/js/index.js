@@ -23,6 +23,7 @@ if (localStorage.getItem("nts_registrado") === null) {
 } else {
     var registrado = localStorage.getItem("nts_registrado");
 }
+
 var watchID;
 var app = {
     // Application Constructor
@@ -73,6 +74,8 @@ var app = {
 };//devideready
 
     var onSuccess = function(position) {
+        $("#cargando").hide();
+        $("#start_engine").show();
         var tiempo = formatear_timestamp(position.timestamp);
         var d = new Date(position.timestamp);
         var n = d.toTimeString();
