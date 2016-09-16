@@ -75,6 +75,7 @@ var app = {
     var contador_geolocalizaciones = 0;
     var onSuccess = function(position) {
         $("#cargando").hide();
+        $("#distance_contenedor").show();
         $("#start_engine").show();
         var tiempo = formatear_timestamp(position.timestamp);
         var d = new Date(position.timestamp);
@@ -98,6 +99,7 @@ var app = {
           var p1 = LatLon(Geo.parseDMS(lata), Geo.parseDMS(longa));
           var p2 = LatLon(Geo.parseDMS(position.coords.latitude), Geo.parseDMS(position.coords.longitude));
           var distancia = Math.ceil(p1.distanceTo(p2));
+          
           $("#distance_contenedor").html(distancia + " m");
         }
         var current_speed = (position.coords.speed * 3.6).toFixed(2); 
