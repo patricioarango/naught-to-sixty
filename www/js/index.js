@@ -73,10 +73,8 @@ var app = {
         }
 };//devideready
     var contador_geolocalizaciones = 0;
+    var distancia = 0;
     var onSuccess = function(position) {
-        $("#cargando").hide();
-        $("#distance_contenedor").show();
-        $("#start_engine").show();
         var tiempo = formatear_timestamp(position.timestamp);
         var d = new Date(position.timestamp);
         var n = d.toTimeString();
@@ -91,6 +89,9 @@ var app = {
               'Hora normal: ' + n);*/
         //distancia
         if (contador_geolocalizaciones == 0){
+          $("#cargando").hide();
+          $("#distance_contenedor").show();
+          $("#start_engine").show();          
           localStorage.setItem("lat_inicial",position.coords.latitude);
           localStorage.setItem("long_inicial",position.coords.longitude);
         } else {
@@ -98,14 +99,16 @@ var app = {
           var longa = localStorage.getItem("long_inicial");
           var p1 = LatLon(Geo.parseDMS(lata), Geo.parseDMS(longa));
           var p2 = LatLon(Geo.parseDMS(position.coords.latitude), Geo.parseDMS(position.coords.longitude));
-          var distancia = Math.ceil(p1.distanceTo(p2));
-          
-          $("#distance_contenedor").html(distancia + " m");
+          distancia = Math.ceil(p1.distanceTo(p2));
         }
+
+        $("#distance_contenedor").html(distancia + " m");
+
         var current_speed = (position.coords.speed * 3.6).toFixed(2); 
           $("#speed_contenedor").text(current_speed + " km/h");
           $(".determinate").css("width", current_speed);
         control_velocidad(current_speed);
+        
         contador_geolocalizaciones++;
     };
 
