@@ -103,10 +103,11 @@ var app = {
         }
 
         $("#distance_contenedor").text(distancia + " m");
-
+        localStorage.setItem("nts_distancia",distancia);
         var current_speed = (position.coords.speed * 3.6).toFixed(2); 
           $("#speed_contenedor").text(current_speed + " km/h");
           $(".determinate").css("width", current_speed);
+        localStorage.setItem("nts_velocidad",current_speed);
         control_velocidad(current_speed);
         
         contador_geolocalizaciones++;
@@ -266,8 +267,9 @@ function control_velocidad(velocidad){
     //clearInterval(simulador_velocidad);
     //detenemos el cronometro
     clearTimeout(timercount);
-    alert("tu tiempo fue de: " + tiempo);
+    //alert("tu tiempo fue de: " + tiempo);
     localStorage.setItem("nts_tiempo",tiempo);
+    tirada_finalizada();
   }
   if (has_started == false){
     if (velocidad > 0){
@@ -335,3 +337,10 @@ function Stop() {
 $(document).on("click","#restart_engine",function(){
   window.location.reload();
 });
+
+function tirada_finalizada(){
+  $("#container").empty();
+  $("#container").html("<p>tu tiempo fue de:  " + localStorage.getItem("nts_tiempo") + " </p> " + 
+                        "<p> y tu distancia de: " + localStorage.getItem("nts_distancia") + " </p> " + 
+                        "<p> y tu velocidad máxima fue: " + localStorage.getItem("nts_velocidad") + " </p> ");
+}

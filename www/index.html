@@ -44,14 +44,12 @@
                 </div>
             </div>
           </div>
-         <!-- nav-->  
             <div class="row flow-text center-align cyan z-depth-1">
                       <div class="col s4 navegador_seleccionado" style="padding: 10px 0px"><a href="/index.html" class="white-text"><strong>0-100 KM/H</strong></a></div>
                       <div class="col s4" style="padding: 10px 0px"><a href="/bydistance.html" class="white-text"><strong>402 MTS</strong></a></div>
                 <div class="col s4" style="padding: 10px 0px"><a href="/ranking.html" class="white-text"><strong>RANKING</strong></a></div>
             </div> 
-        </div>
-    </div>  <!-- nav-->  
+        </div><!-- nav--> 
                 <!--<div class="row" id="geo_values"></div>-->
                 <div id="cargando" class="row center-align">
                   <div class="preloader-wrapper small active">
@@ -65,22 +63,24 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div><!-- loading-->
+      
                 <div class="row">
-                <div class="col s3"><br>
-                    <span id="distance_contenedor" style="font-weight:700;font-size:1.8em;display:none;"></span>
+                    <div class="col s3"><br>
+                        <span id="distance_contenedor" style="font-weight:700;font-size:1.8em;display:none;"></span>
+                    </div>
+                    <div class="col s9 right-align">
+                      <span id="speed_contenedor" style="font-weight:700;font-size:3em;display:none;"></span>
+                    </div>
+
+                    <div class="center-align">
+                        <span id="speed_not_zero" class="flow-text" style="display:none;"><i class="material-icons red-text accent-4" style="font-size:1.8em;">network_check</i>your speed is not zero, we can't start!</span>
+                    </div>    
+                      <div class="progress cyan lighten-3" id="progress_bar" style="display:none;">
+                        <div class="determinate cyan accent-4"></div>
+                      </div>
                 </div>
-                <div class="col s9 right-align">
-                  <span id="speed_contenedor" style="font-weight:700;font-size:3em;display:none;"></span>
-                </div>
-                    
-                <div class="center-align">
-                    <span id="speed_not_zero" class="flow-text" style="display:none;"><i class="material-icons red-text accent-4" style="font-size:1.8em;">network_check</i>your speed is not zero, we can't start!</span>
-                </div>    
-                  <div class="progress cyan lighten-3" id="progress_bar" style="display:none;">
-                    <div class="determinate cyan accent-4"></div>
-                  </div>
-                </div>
+      
                 <div class="row center-align">
                     <i id="start_engine" class="material-icons cyan-text accent-4" style="font-size:16em;display:none;">network_check</i>
 
@@ -90,8 +90,6 @@
                   </span>
 
                     <div id="content" style="font-weight:700;font-size:8em"></div>
-                    
-
         
                     <div id="time_contenedor" style="font-weight:700;font-size:8em"></div>
                     <div id="tiempo_final" style="font-weight:700;font-size:8em;"></div>
@@ -100,8 +98,7 @@
                       </div>
                         <i id="restart_engine" class="material-icons cyan-text accent-4" style="font-size:8em;display:none;">autorenew</i>
                     </div>
-                    
-
+                </div>    
         </div><!-- container-->
          <footer class="page-footer cyan lighten-1">
           <div class="container">
