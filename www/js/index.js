@@ -102,7 +102,7 @@ var app = {
           distancia = Math.ceil(p1.distanceTo(p2));
         }
 
-        $("#distance_contenedor").html(distancia + " m");
+        $("#distance_contenedor").text(distancia + " m");
 
         var current_speed = (position.coords.speed * 3.6).toFixed(2); 
           $("#speed_contenedor").text(current_speed + " km/h");
@@ -259,7 +259,7 @@ function show_extra_time(){
 
 var stop_speed = 30;
 function control_velocidad(velocidad){
-  if (parseInt(velocidad) >= parseInt(stop_speed)){ 
+  if (parseInt(velocidad) >= parseInt(stop_speed) && has_started){ 
     //detenemos el watch del geolocalizador
     navigator.geolocation.clearWatch(watchID);
     //detenemos el simulador
