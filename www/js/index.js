@@ -23,7 +23,12 @@ if (localStorage.getItem("nts_registrado") === null) {
 } else {
     var registrado = localStorage.getItem("nts_registrado");
 }
-
+//id de tirada
+if (localStorage.getItem("nts_id_tirada") === null) {
+    var nts_id_tirada = "0";
+} else {
+    var nts_id_tirada = Number(localStorage.getItem("nts_id_tirada")) + 1;
+}
 var watchID;
 var app = {
     // Application Constructor
@@ -74,6 +79,7 @@ var app = {
 };//devideready
     var contador_geolocalizaciones = 0;
     var distancia = 0;
+    var tirada = {};
     var onSuccess = function(position) {
         var tiempo = formatear_timestamp(position.timestamp);
         var d = new Date(position.timestamp);
@@ -109,7 +115,8 @@ var app = {
           $(".determinate").css("width", current_speed);
         localStorage.setItem("nts_velocidad",current_speed);
         control_velocidad(current_speed);
-        
+        //guardamos la tirada
+        tirada[contador_geolocalizaciones] = {"nro": contador_geolocalizaciones,"velocidad": current_speed,"distancia": distancia,"lat_inicial":localStorage.getItem("lat_inicial"), "long_inicial": localStorage.getItem("long_inicial"),"lat": position.coords.latitude, "long": position.coords.longitude};
         contador_geolocalizaciones++;
     };
 
@@ -339,8 +346,31 @@ $(document).on("click","#restart_engine",function(){
 });
 
 function tirada_finalizada(){
+  //localStorage.setItem("tirada_"+ nts_id_tirada,JSON.stringify(tirada));
   $("#container").empty();
-  $("#container").html("<p>tu tiempo fue de:  " + localStorage.getItem("nts_tiempo") + " </p> " + 
+  $("#container").append("<p>tu tiempo fue de:  " + localStorage.getItem("nts_tiempo") + " </p> " + 
                         "<p> y tu distancia de: " + localStorage.getItem("nts_distancia") + " </p> " + 
                         "<p> y tu velocidad máxima fue: " + localStorage.getItem("nts_velocidad") + " </p> ");
+  $("#container").append('<table>'+
+        '<thead>'+
+         ' <tr>'+
+              '<th data-field="id">nro</th>'+
+              '<th data-field="name">velocidad</th>'+
+              '<th data-field="price">distancia</th>'+
+              '<th data-field="price">lat_inicial</th>'+
+              '<th data-field="price">long_inicial</th>'+
+              '<th data-field="price">lat</th>'+
+              '<th data-field="price">long</th>'+
+         ' </tr>'+
+        '</thead><tbody>');
+  $.each(tirada, function(key, value){
+      $("#container").append('<tr><td data-field="id">'+value.nro+'</td>'+
+                '<td data-field="name">'+value.velocidad+'</td>'+
+                '<td data-field="price">'+value.distancia+'</td>'+
+                '<td data-field="price">'+value.lat_inicial+'</td>'+
+                '<td data-field="price">'+value.long_inicial+'</td>'+
+                '<td data-field="price">'+value.lat+'</td>'+
+                '<td data-field="price">'+value.long+'</td></tr>');
+  });
+  $("#container").append('</tbody></table>');
 }
