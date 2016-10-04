@@ -101,11 +101,10 @@ var app = {
           localStorage.setItem("lat_inicial",position.coords.latitude);
           localStorage.setItem("long_inicial",position.coords.longitude);
         } else {
+          //calculamos la distancia
           var lata = localStorage.getItem("lat_inicial");
           var longa = localStorage.getItem("long_inicial");
-          var p1 = LatLon(Geo.parseDMS(lata), Geo.parseDMS(longa));
-          var p2 = LatLon(Geo.parseDMS(position.coords.latitude), Geo.parseDMS(position.coords.longitude));
-          distancia = Math.ceil(p1.distanceTo(p2));
+          distancia = (getDistanceFromLatLonInKm(lata,longa,position.coords.latitude,position.coords.longitude) * 1000);
         }
 
         $("#distance_contenedor").text(distancia + " m");
@@ -115,6 +114,7 @@ var app = {
           $(".determinate").css("width", current_speed);
         localStorage.setItem("nts_velocidad",current_speed);
         control_velocidad(current_speed);
+        
         //guardamos la tirada
         tirada[contador_geolocalizaciones] = {"nro": contador_geolocalizaciones,"velocidad": current_speed,"distancia": distancia,"lat_inicial":localStorage.getItem("lat_inicial"), "long_inicial": localStorage.getItem("long_inicial"),"lat": position.coords.latitude, "long": position.coords.longitude};
         contador_geolocalizaciones++;
@@ -246,8 +246,6 @@ function showtimer() {
 }
 
 function sw_start(){
-  $("#speed_contenedor").show();
-  $("#progress_bar").show();
   has_started = true;
   //simulador_velocidad = setInterval(function(){simulador()},50);
 
@@ -346,7 +344,7 @@ $(document).on("click","#restart_engine",function(){
 });
 
 function tirada_finalizada(){
-  //localStorage.setItem("tirada_"+ nts_id_tirada,JSON.stringify(tirada));
+  localStorage.setItem("tirada_"+ nts_id_tirada,JSON.stringify(tirada));
   $("#container").empty();
   $("#container").append("<p>tu tiempo fue de:  " + localStorage.getItem("nts_tiempo") + " </p> " + 
                         "<p> y tu distancia de: " + localStorage.getItem("nts_distancia") + " </p> " + 
@@ -373,4 +371,22 @@ function tirada_finalizada(){
                 '<td data-field="price">'+value.long+'</td></tr>');
   });
   $("#container").append('</tbody></table>');
+}
+
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
 }
