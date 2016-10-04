@@ -346,6 +346,7 @@ $(document).on("click","#restart_engine",function(){
 function tirada_finalizada(){
   localStorage.setItem("tirada_"+ nts_id_tirada,JSON.stringify(tirada));
   $("#container").empty();
+  $("#container").append('<div class="row"><div class="col s12">');
   $("#container").append("<p>tu tiempo fue de:  " + localStorage.getItem("nts_tiempo") + " </p> " + 
                         "<p> y tu distancia de: " + localStorage.getItem("nts_distancia") + " </p> " + 
                         "<p> y tu velocidad máxima fue: " + localStorage.getItem("nts_velocidad") + " </p> ");
@@ -371,6 +372,7 @@ function tirada_finalizada(){
                 '<td data-field="price">'+value.long+'</td></tr>');
   });
   $("#container").append('</tbody></table>');
+  $("#container").append('</div></div>');
 }
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
