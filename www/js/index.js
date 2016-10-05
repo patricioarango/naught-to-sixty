@@ -107,8 +107,8 @@ var app = {
           distancia = (getDistanceFromLatLonInKm(lata,longa,position.coords.latitude,position.coords.longitude) * 1000);
         }
 
-        $("#distance_contenedor").text(distancia + " m");
-        localStorage.setItem("nts_distancia",distancia);
+        $("#distance_contenedor").text(parseInt(distancia) + " m");
+        localStorage.setItem("nts_distancia",parseInt(distancia));
         var current_speed = (position.coords.speed * 3.6).toFixed(2); 
           $("#speed_contenedor").text(current_speed + " km/h");
           $(".determinate").css("width", current_speed);
@@ -116,7 +116,7 @@ var app = {
         control_velocidad(current_speed);
         
         //guardamos la tirada
-        tirada[contador_geolocalizaciones] = {"nro": contador_geolocalizaciones,"velocidad": current_speed,"distancia": distancia,"lat_inicial":localStorage.getItem("lat_inicial"), "long_inicial": localStorage.getItem("long_inicial"),"lat": position.coords.latitude, "long": position.coords.longitude};
+        tirada[contador_geolocalizaciones] = {"nro": contador_geolocalizaciones,"velocidad": current_speed,"distancia": parseInt(distancia),"lat_inicial":localStorage.getItem("lat_inicial"), "long_inicial": localStorage.getItem("long_inicial"),"lat": position.coords.latitude, "long": position.coords.longitude};
         contador_geolocalizaciones++;
     };
 
