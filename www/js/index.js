@@ -167,6 +167,32 @@ var config = {
 firebase.initializeApp(config);
 var db = firebase.database();
 
+//id de firebase
+if (localStorage.getItem("nts_id_firebase") === null) {
+  firebase.auth().signInAnonymously().catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+  });  
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      var isAnonymous = user.isAnonymous;
+      var nts_id_firebase = user.uid;
+      // ...
+    } else {
+      // User is signed out.
+      // ...
+    }
+    // ...
+  });  
+
+} else {
+    var nts_id_firebase = localStorage.getItem("nts_id_firebase");
+}
+
 var speed = 1;
 function simulador(){
     $(".determinate").css("width", speed);
@@ -344,7 +370,10 @@ $(document).on("click","#restart_engine",function(){
 });
 
 function tirada_finalizada(){
+  db.ref('usuario/'+nts_id_firebase+'/'+nts_id_tirada).set({tirada});
+
   localStorage.setItem("tirada_"+ nts_id_tirada,JSON.stringify(tirada));
+  
   $("#container").empty();
   $("#container").append('<div class="row"><div class="col s12">');
   $("#container").append("<p>tu tiempo fue de:  " + localStorage.getItem("nts_tiempo") + " </p> " + 
