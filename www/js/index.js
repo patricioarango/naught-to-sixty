@@ -41,7 +41,7 @@ var app = {
     },onDeviceReady: function() {
         console.log("deviceready");
 
-        var geooptions = { timeout: 30000,enableHighAccuracy: true };
+        var geooptions = { maximumAge: 1000, timeout: 15000,enableHighAccuracy: true };
 
         watchID = navigator.geolocation.watchPosition(onSuccess, onError,geooptions);
 
