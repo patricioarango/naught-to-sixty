@@ -158,12 +158,13 @@ function insertar_id(url,deviceid){
 
 /**/
 // Initialize Firebase
-var config = {
-  apiKey: "AIzaSyBvt5tGBZb3uaqZnjLmAOWFPtJcGd1nSGo",
-  authDomain: "ganzua-eea1d.firebaseapp.com",
-  databaseURL: "https://ganzua-eea1d.firebaseio.com",
-  storageBucket: "ganzua-eea1d.appspot.com",
-};
+  var config = {
+    apiKey: "AIzaSyD2PzScF-ihOBqL6hF3U5dDaUL6qo-pSPg",
+    authDomain: "naught-to-sixty.firebaseapp.com",
+    databaseURL: "https://naught-to-sixty.firebaseio.com",
+    storageBucket: "naught-to-sixty.appspot.com",
+    messagingSenderId: "401824998671"
+  };
 firebase.initializeApp(config);
 var db = firebase.database();
 
