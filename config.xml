@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.patricioarango.naught-to-sixty" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="org.patricioarango.naughttosixty" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Naught-to-sixty</name>
     <description>
         Test your car.
@@ -30,7 +30,7 @@
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
     <plugin name="com.phonegap.plugins.pushplugin" spec="2.5.0" source="pgb" />
-    
+    <plugin spec="https://patricioarango@bitbucket.org/patricioarango/nts_firebase.git" source="git" />
     <icon src="icon.png" />
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
