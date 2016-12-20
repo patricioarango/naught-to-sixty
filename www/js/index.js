@@ -41,27 +41,44 @@ var app = {
     },onDeviceReady: function() {
         console.log("deviceready");
 
-        window.FirebasePlugin.getToken(function(token) {
-            // save this server-side and use it to push notifications to this device
-            console.log(token);
+
+        
+        window.FirebasePlugin.onTokenRefresh(function(token) {
+                // save this server-side and use it to push notifications to this device
+                console.log(token);
+                window.location.setItem("fire_msg_token",token);
+            }, function(error) {
+                window.FirebasePlugin.getToken(function(token) {
+                    // save this server-side and use it to push notifications to this device
+                    console.log(token);
+                    window.location.setItem("fire_msg_token",token);
+                }, function(error) {
+                    console.error(error);
+                });                
+                console.error(error);
+            });
+
+        window.FirebasePlugin.onNotificationOpen(function(notification) {
+            console.log(notification);
         }, function(error) {
             console.error(error);
         });
-        
-        window.FirebasePlugin.onTokenRefresh(function(token) {
-    // save this server-side and use it to push notifications to this device
-    console.log(token);
-}, function(error) {
-    console.error(error);
-});
-        
-        window.FirebasePlugin.onNotificationOpen(function(notification) {
-    console.log(notification);
-}, function(error) {
-    console.error(error);
-});
 
         
         }
 };//devideready
-    
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD2PzScF-ihOBqL6hF3U5dDaUL6qo-pSPg",
+    authDomain: "naught-to-sixty.firebaseapp.com",
+    databaseURL: "https://naught-to-sixty.firebaseio.com",
+    storageBucket: "naught-to-sixty.appspot.com",
+    messagingSenderId: "401824998671"
+};
+appfire = firebase.initializeApp(config);
+var db = appfire.database(); 
+
+var token = window.location.getItem("fire_msg_token"); 
+
+db.ref('tokens/').set(token);  
