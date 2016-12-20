@@ -40,18 +40,17 @@ var app = {
         
     },onDeviceReady: function() {
         console.log("deviceready");
-
-
-        
         window.FirebasePlugin.onTokenRefresh(function(token) {
                 // save this server-side and use it to push notifications to this device
                 console.log(token);
                 window.localStorage.setItem("fire_msg_token",token);
+                guardar_token(token);
             }, function(error) {
                 window.FirebasePlugin.getToken(function(token) {
                     // save this server-side and use it to push notifications to this device
                     console.log(token);
                     window.localStorage.setItem("fire_msg_token",token);
+                    guardar_token(token);
                 }, function(error) {
                     console.error(error);
                 });                
@@ -68,17 +67,21 @@ var app = {
         }
 };//devideready
 
-  // Initialize Firebase
-  var config = {
+function guardar_token(token){
+
+// Initialize Firebase
+var config = {
     apiKey: "AIzaSyD2PzScF-ihOBqL6hF3U5dDaUL6qo-pSPg",
     authDomain: "naught-to-sixty.firebaseapp.com",
     databaseURL: "https://naught-to-sixty.firebaseio.com",
     storageBucket: "naught-to-sixty.appspot.com",
     messagingSenderId: "401824998671"
 };
-appfire = firebase.initializeApp(config);
-var db = appfire.database(); 
 
-var token = window.localStorage.getItem("fire_msg_token"); 
+    appfire = firebase.initializeApp(config);
+    var db = appfire.database(); 
 
-db.ref('tokens/').set(token);  
+    //var token = window.localStorage.getItem("fire_msg_token"); 
+
+    db.ref('/tokens/tokenid_'+token).set(token);  
+}
