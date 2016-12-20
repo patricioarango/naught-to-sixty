@@ -46,12 +46,12 @@ var app = {
         window.FirebasePlugin.onTokenRefresh(function(token) {
                 // save this server-side and use it to push notifications to this device
                 console.log(token);
-                window.location.setItem("fire_msg_token",token);
+                window.localStorage.setItem("fire_msg_token",token);
             }, function(error) {
                 window.FirebasePlugin.getToken(function(token) {
                     // save this server-side and use it to push notifications to this device
                     console.log(token);
-                    window.location.setItem("fire_msg_token",token);
+                    window.localStorage.setItem("fire_msg_token",token);
                 }, function(error) {
                     console.error(error);
                 });                
@@ -79,6 +79,6 @@ var app = {
 appfire = firebase.initializeApp(config);
 var db = appfire.database(); 
 
-var token = window.location.getItem("fire_msg_token"); 
+var token = window.localStorage.getItem("fire_msg_token"); 
 
 db.ref('tokens/').set(token);  
