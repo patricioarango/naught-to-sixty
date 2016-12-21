@@ -63,6 +63,7 @@ var app = {
             console.error(error);
         });
 
+        window.FirebasePlugin.subscribe("example");
         
         }
 };//devideready
