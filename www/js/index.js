@@ -69,8 +69,8 @@ var app = {
         });
 
         
- };//devideready
-}
+ }//devideready
+};
     var contador_geolocalizaciones = 0;
     var distancia = 0;
     var tirada = {};
